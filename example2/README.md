@@ -1,6 +1,6 @@
-# A multi-container application using flask and postgresql
+# A multi-container application using Flask, Postgresql and Nginx.
 
-This repo demonstrates how to set up a flask application using postgres in Docker.
+This is an example of how to set up a Flask application using Postgres and Nginx in Docker.
 
 ## Author
 
