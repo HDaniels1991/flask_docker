@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+
+  postgres_db:
+    image: postgres:11.2
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+    container_name: postgres_db
+    env_file:
+      - env_file
+    restart: always
+    networks:
+      - db_nw
+
+  flask_app:
+    build:
+      context: ./flask_app
+    image: flask_app
+    container_name: flask_app
+    env_file:
+      - env_file
+    depends_on:
+      - "postgres_db"
+    restart: always
+    networks:
+      - db_nw
+      - web_nw
+
+  nginx:
+    image: nginx:1.15.12
+    ports:
+      - '80:80'
+    volumes:
+      # Overwrite default container config file.
+      - ./nginx/conf.d/flask_app.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - "flask_app"
+    networks:
+      - web_nw
+
+volumes:
+  dbdata:
+
+networks:
+  db_nw:
+  web_nw:
