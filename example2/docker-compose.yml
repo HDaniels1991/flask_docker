@@ -32,9 +32,14 @@ services:
     container_name: nginx
     ports:
       - '80:80'
+      - '443:443'
     volumes:
       # Overwrite default container config file.
-      - ./nginx/conf.d/flask_app1.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/conf.d/flask_app2.conf:/etc/nginx/conf.d/default.conf
+      # upload ssl certificates
+      - ./nginx/ssl/44314642_www.example.com.cert:/etc/nginx/www.example.com.cert
+      - ./nginx/ssl/44314642_www.example.com.key:/etc/nginx/www.example.com.key
+      # DH params
     depends_on:
       - "flask_app"
     networks:
