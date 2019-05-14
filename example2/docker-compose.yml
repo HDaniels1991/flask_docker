@@ -39,7 +39,7 @@ services:
       # upload ssl certificates
       - ./nginx/ssl/44314642_www.example.com.cert:/etc/nginx/www.example.com.cert
       - ./nginx/ssl/44314642_www.example.com.key:/etc/nginx/www.example.com.key
-      # DH params
+
     depends_on:
       - "flask_app"
     networks:
